@@ -13,6 +13,15 @@ function show($tpl, $array)
   
     if($fp = @fopen($template.".".html, "r"))
       $tpl = @fread($fp, filesize($template.".".html));
+    //Global-Definie
+    $pholder = explode("^",pholderreplace($tpl));
+    for($i=0;$i<=count($pholder)-1;$i++) br=""><!--=count($pholder)-1;$i++)-->      if ( preg_match("#^_(.*?)_$#Uis",trim($pholder[$i])) )
+    {
+      $name = preg_replace("#_(.*?)_#Uis", "$1", trim($pholder[$i]));
+      @eval("$array['_".$name."_'] = _".$name.";");
+    }
+}
+    //Global-Definie
     
     $array['dir'] = '../inc/_templates_/'.$tmpdir;
     foreach($array as $value => $code)
